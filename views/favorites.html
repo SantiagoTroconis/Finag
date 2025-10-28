@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detector de Banderas con OpenCV.js</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 1em;
+        }
+
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 640px;
+            margin: 20px auto;
+            border: 3px solid #3498db;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        #status {
+            background-color: #e74c3c;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        #result {
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Detector de Banderas</h1>
+    <div class="container">
+        <canvas id="outputCanvas"></canvas>
+
+        <video id="videoInput" auto playsinline></video>
+    </div>
+
+    <div id="status">Cargando OpenCV...</div>
+    <div id="result">Apunta la cámara a una bandera</div>
+
+    <script async src="https://docs.opencv.org/4.9.0/opencv.js" onload="onOpenCvReady();"></script>
+
+    <script>
+        // Variable global para saber si OpenCV está listo
+        let cvReady = false;
+        let stream; // Variable para guardar el stream de la cámara
+
+        // Elementos del DOM
+        let video;
+        let canvas;
+        let statusElement;
+        let resultElement;
+
+        // Tamaño del video (ajustar según sea necesario)
+        const videoWidth = 640;
+        const videoHeight = 480;
+
+        // JSON con la definición de las banderas (integrado aquí por simplicidad)
+        const flagsData = {
+            "banderas": [
+                // ... (Tu JSON de banderas va aquí, igual que antes)
+                {
+                    "id": "mexico",
+                    "nombre": "México",
+                    "colores": [
+                        { "nombre": "verde", "hsv_min": [35, 50, 50], "hsv_max": [85, 255, 255], "proporcion": 0.33 },
+                        { "nombre": "blanco", "hsv_min": [0, 0, 200], "hsv_max": [180, 30, 255], "proporcion": 0.33 },
+                        { "nombre": "rojo", "hsv_min": [0, 100, 100], "hsv_max": [10, 255, 255], "proporcion": 0.33 }
+                    ],
+                    "discriminador_clave": "escudo_central"
+                },
+                {
+                    "id": "japon",
+                    "nombre": "Japón",
+                    "colores": [
+                        { "nombre": "blanco", "hsv_min": [0, 0, 200], "hsv_max": [180, 50, 255], "proporcion": 0.80 },
+                        { "nombre": "rojo", "hsv_min": [0, 120, 120], "hsv_max": [10, 255, 255], "proporcion": 0.15 }
+                    ]
+                }
+            ]
+        };
+
+        // --- INICIALIZACIÓN ---
+
+        function onOpenCvReady() {
+            cvReady = true;
+            statusElement = document.getElementById('status');
+            statusElement.innerHTML = 'OpenCV listo. Iniciando cámara...';
+            statusElement.style.backgroundColor = '#f39c12';
+            init(); // Cambiamos el nombre a init para más claridad
+        }
+
+        async function init() {
+            video = document.getElementById('videoInput');
+            canvas = document.getElementById('outputCanvas');
+            resultElement = document.getElementById('result');
+
+            // Ajustamos el tamaño del canvas para que coincida con el del video
+            canvas.width = videoWidth;
+            canvas.height = videoHeight;
+
+            const constraints = {
+                video: {
+                    width: videoWidth,
+                    height: videoHeight,
+                    facingMode: 'environment'
+                }
+            };
+
+            try {
+                stream = await navigator.mediaDevices.getUserMedia(constraints);
+                video.srcObject = stream;
+                video.play();
+
+                video.addEventListener('canplay', startProcessing);
+
+            } catch (err) {
+                console.error("Error al acceder a la cámara: ", err);
+                statusElement.innerHTML = 'Error al acceder a la cámara. Revisa los permisos.';
+                statusElement.style.backgroundColor = '#e74c3c';
+            }
+        }
+
+        function startProcessing() {
+            if (!cvReady) {
+                console.warn("OpenCV no está listo todavía.");
+                return;
+            }
+            statusElement.innerHTML = 'Cámara iniciada. Procesando...';
+            statusElement.style.backgroundColor = '#2ecc71';
+
+            // Inicia el bucle de procesamiento
+            requestAnimationFrame(processVideo);
+        }
+
+        function processVideo() {
+            try {
+                if (video.paused || video.ended) {
+                    return;
+                }
+
+                // 1. CAPTURAR FRAME Y PRE-PROCESAR
+                let src = new cv.Mat(videoHeight, videoWidth, cv.CV_8UC4);
+                let cap = new cv.VideoCapture(video);
+                cap.read(src); // Lee el frame del video y lo pone en la matriz 'src'
+
+                let hsv = new cv.Mat();
+                cv.cvtColor(src, hsv, cv.COLOR_RGBA2HSV);
+
+                // 2. DETECCIÓN DE CONTORNO DE LA BANDERA
+                let saturationMask = new cv.Mat();
+                let lowerSat = new cv.Mat(hsv.rows, hsv.cols, hsv.type(), [0, 50, 50, 0]);
+                let upperSat = new cv.Mat(hsv.rows, hsv.cols, hsv.type(), [180, 255, 255, 255]);
+                cv.inRange(hsv, lowerSat, upperSat, saturationMask);
+
+                let contours = new cv.MatVector();
+                let hierarchy = new cv.Mat();
+                cv.findContours(saturationMask, contours, hierarchy, cv.RETR_EXTERNAL, cv.CHAIN_APPROX_SIMPLE);
+
+                let bestContour = null;
+                let maxArea = 0;
+
+                for (let i = 0; i < contours.size(); ++i) {
+                    let cnt = contours.get(i);
+                    let area = cv.contourArea(cnt);
+                    if (area > 5000 && area > maxArea) { // Aumentamos el área mínima para ser más selectivos
+                        maxArea = area;
+                        bestContour = cnt;
+                    } else {
+                        cnt.delete(); // Liberamos memoria de los contornos que no nos sirven
+                    }
+                }
+
+                let detectedFlag = "Ninguna";
+
+                if (bestContour) {
+                    // **AQUÍ DIBUJAMOS EL CONTORNO ENCONTRADO**
+                    let contourVec = new cv.MatVector();
+                    contourVec.push_back(bestContour);
+                    let color = new cv.Scalar(0, 255, 0, 255); // Verde
+                    cv.drawContours(src, contourVec, -1, color, 3, cv.LINE_8, hierarchy, 0);
+                    contourVec.delete();
+
+                    // (El resto de la lógica de análisis de color va aquí, como antes)
+                    // ...
+                }
+
+                // Mostramos el resultado en el canvas
+                cv.imshow('outputCanvas', src);
+                resultElement.innerHTML = `Detectado: ${detectedFlag}`;
+
+                // Limpieza de memoria
+                src.delete(); hsv.delete(); saturationMask.delete(); contours.delete(); hierarchy.delete();
+                if (bestContour) bestContour.delete();
+
+            } catch (err) {
+                console.error("Error en el bucle de procesamiento:", err);
+            }
+
+            // Siguiente frame
+            requestAnimationFrame(processVideo);
+        }
+    </script>
+</body>
+
+</html>

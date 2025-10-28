@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FINAG</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.18.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Russo+One&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        body {
+            background-color: #1a1a2e;
+            color: #f0f0f0;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+
+        h1,
+        h2,
+        h3,
+        .navbar-brand,
+        .modal-title {
+            font-family: 'Russo One', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, rgba(29, 38, 113, 0.8) 0%, rgba(195, 55, 100, 0.8) 100%), url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1935&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+            padding: 4rem 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .section-title {
+            color: #e0f780;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .card {
+            background-color: #162447;
+            border: 1px solid #1f4068;
+            border-radius: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(224, 247, 128, 0.1);
+        }
+
+        .team-card {
+            cursor: pointer;
+        }
+
+        .team-card img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #e0f780;
+        }
+
+        .bottom-nav {
+            background: rgba(22, 36, 71, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid #1f4068;
+        }
+
+        .bottom-nav .nav-link {
+            color: #f0f0f0;
+            transition: color 0.3s ease;
+        }
+
+        .bottom-nav .nav-link.active,
+        .bottom-nav .nav-link:hover {
+            color: #e0f780;
+            background-color: transparent !important;
+        }
+
+        .quiz-card .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .quiz-option {
+            background-color: #1f4068;
+            border: 1px solid #1f4068;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .quiz-option:hover:not(:disabled) {
+            background-color: #e0f780;
+            color: #1a1a2e;
+        }
+
+        .quiz-option.correct {
+            background-color: #28a745 !important;
+            border-color: #28a745 !important;
+        }
+
+        .quiz-option.incorrect {
+            background-color: #dc3545 !important;
+            border-color: #dc3545 !important;
+        }
+
+        .horizontal-scroll-wrapper {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 1rem;
+        }
+
+        .horizontal-scroll-wrapper .row {
+            flex-wrap: nowrap;
+        }
+
+        .horizontal-scroll-wrapper .col-custom {
+            display: inline-block;
+            float: none;
+            width: 80%;
+            /* Ancho de cada tarjeta */
+            max-width: 320px;
+            vertical-align: top;
+        }
+
+        .horizontal-scroll-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+
+        .horizontal-scroll-wrapper {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .modal-content {
+            background-color: #162447;
+            border: 1px solid #1f4068;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #1f4068;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #1f4068;
+        }
+
+        /* Estilos para los botones de filtro */
+        .filter-buttons {
+            padding: 0.75rem;
+            background-color: rgba(31, 64, 104, 0.3);
+            border-top: 1px solid #1f4068;
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .filter-btn {
+            background-color: #1f4068;
+            color: #f0f0f0;
+            border: 1px solid #1f4068;
+            padding: 0.4rem 0.8rem;
+            margin: 0 0.25rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background-color: #e0f780;
+            color: #1a1a2e;
+            border-color: #e0f780;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background-color: #e0f780;
+            color: #1a1a2e;
+            border-color: #e0f780;
+        }
+
+        /* Filtros CSS para los videos */
+        .video-container.grayscale iframe {
+            filter: grayscale(100%) contrast(1.2);
+        }
+
+        .video-container.sepia iframe {
+            filter: sepia(100%) hue-rotate(20deg) saturate(1.5);
+        }
+
+        .video-container.normal iframe {
+            filter: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid p-0 pb-5 mb-5">
+
+        <header id="inicio" class="hero-section text-center text-white">
+            <h1 class="display-4">FIFA World Cup 2026</h1>
+            <p class="lead">Prepárate para el torneo más grande de la historia.</p>
+        </header>
+
+        <main class="py-5">
+            <section id="trivia" class="container-fluid mb-5">
+                <h2 class="section-title text-center">Pon a prueba tus conocimientos</h2>
+                <div id="quiz-container" class="horizontal-scroll-wrapper px-3">
+
+                </div>
+            </section>
+
+            <hr class="my-5" style="border-color: #1f4068;">
+
+            <section id="ar-section" class="container my-5 p-4 rounded-3 text-center">
+                <h2 class="section-title">Experiencia de Realidad Aumentada</h2>
+                <p class="text-white-50 mb-4">¡Escanea la bandera de tu equipo y mira la magia!</p>
+                <button id="activateCamera" class="btn btn-lg"
+                    style="background-color: #e0f780; color: #1a1a2e; font-weight: bold;">
+                    <i class="bi bi-camera-fill me-2"></i> Activar Cámara
+                </button>
+
+                <div id="cameraContainer" class="mt-4 position-relative"
+                    style="display: none; max-width: 500px; margin: auto;">
+
+                    <video id="camera" autoplay playsinline class="w-100"
+                        style="border-radius: 1rem; border: 2px solid #e0f780;"></video>
+
+                    <canvas id="arCanvas" class="position-absolute"
+                        style="top: 0; left: 0; width: 100%; height: 100%; z-index: 5;"></canvas>
+
+                    <button id="closeCamera" class="btn btn-danger position-absolute"
+                        style="top: 10px; right: 10px; z-index: 10;">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+
+                    <button id="arToggleButton" class="btn position-absolute"
+                        style="display: none; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 10; background-color: #e0f780; color: #1a1a2e; font-weight: bold;">
+                        <i class="bi bi-box me-2"></i> Ver Modelo
+                    </button>
+
+                    <p class="text-white-50 mt-3" id="result">Cargando...</p>
+                </div>
+            </section>
+
+            <hr class="my-5" style="border-color: #1f4068;">
+
+            <section id="highlights" class="container-fluid mb-5">
+                <h2 class="section-title text-center">Momentos Inolvidables</h2>
+                <div id="highlightsContainer" class="horizontal-scroll-wrapper px-3">
+                    <div class="row g-4">
+                    </div>
+                </div>
+            </section>
+
+            <hr class="my-5" style="border-color: #1f4068;">
+
+            <section id="teams" class="container">
+                <h2 class="section-title text-center">Equipos a Seguir
+                </h2>
+                <div class="row g-3">
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Canadá" data-team-confederation="CONCACAF"
+                            data-team-titles="0" data-team-appearances="3" data-team-scorer="–">
+                            <img src="https://flagcdn.com/w80/ca.png" alt="Bandera Canadá">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Canadá</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="México" data-team-confederation="CONCACAF"
+                            data-team-titles="0" data-team-appearances="17" data-team-scorer="Javier Hernández (52)">
+                            <img src="https://flagcdn.com/w80/mx.png" alt="Bandera México">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">México</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Estados Unidos"
+                            data-team-confederation="CONCACAF" data-team-titles="0" data-team-appearances="11"
+                            data-team-scorer="Clint Dempsey (57)">
+                            <img src="https://flagcdn.com/w80/us.png" alt="Bandera USA">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">EE.UU.</h5>
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Argentina" data-team-confederation="CONMEBOL"
+                            data-team-titles="3" data-team-appearances="18" data-team-scorer="Lionel Messi (106)">
+                            <img src="https://flagcdn.com/w80/ar.png" alt="Bandera Argentina">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Argentina</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Brasil" data-team-confederation="CONMEBOL"
+                            data-team-titles="5" data-team-appearances="22" data-team-scorer="Neymar (79)">
+                            <img src="https://flagcdn.com/w80/br.png" alt="Bandera Brasil">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Brasil</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Colombia" data-team-confederation="CONMEBOL"
+                            data-team-titles="0" data-team-appearances="7" data-team-scorer="Radamel Falcao (35)">
+                            <img src="https://flagcdn.com/w80/co.png" alt="Bandera Colombia">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Colombia</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Paraguay" data-team-confederation="CONMEBOL"
+                            data-team-titles="0" data-team-appearances="8" data-team-scorer="Roque Santa Cruz (32)">
+                            <img src="https://flagcdn.com/w80/py.png" alt="Bandera Paraguay">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Paraguay</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Ecuador" data-team-confederation="CONMEBOL"
+                            data-team-titles="0" data-team-appearances="4" data-team-scorer="Enner Valencia (37)">
+                            <img src="https://flagcdn.com/w80/ec.png" alt="Bandera Ecuador">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Ecuador</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Uruguay" data-team-confederation="CONMEBOL"
+                            data-team-titles="2" data-team-appearances="14" data-team-scorer="Luis Suárez (68)">
+                            <img src="https://flagcdn.com/w80/uy.png" alt="Bandera Uruguay">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Uruguay</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Australia" data-team-confederation="AFC"
+                            data-team-titles="0" data-team-appearances="6" data-team-scorer="Tim Cahill (50)">
+                            <img src="https://flagcdn.com/w80/au.png" alt="Bandera Australia">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Australia</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Portugal" data-team-confederation="UEFA"
+                            data-team-titles="3" data-team-appearances="6" data-team-scorer="André Silva (14)">
+                            <img src="https://flagcdn.com/w80/pt.png" alt="Bandera Portugal">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Portugal</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Japón" data-team-confederation="AFC"
+                            data-team-titles="0" data-team-appearances="7" data-team-scorer="Kunishige Kamamoto (80)">
+                            <img src="https://flagcdn.com/w80/jp.png" alt="Bandera Japón">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Japón</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Jordania" data-team-confederation="AFC"
+                            data-team-titles="0" data-team-appearances="0" data-team-scorer="–">
+                            <img src="https://flagcdn.com/w80/jo.png" alt="Bandera Jordania">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Jordania</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Corea del Sur" data-team-confederation="AFC"
+                            data-team-titles="0" data-team-appearances="11" data-team-scorer="Cha Bum-k-un (58)">
+                            <img src="https://flagcdn.com/w80/kr.png" alt="Bandera Corea del Sur">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Corea del Sur</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="España" data-team-confederation="UEFA"
+                            data-team-titles="1" data-team-appearances="15" data-team-scorer="David Villa (59)">
+                            <img src="https://flagcdn.com/w80/es.png" alt="Bandera España">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">España</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Arabia Saudita" data-team-confederation="AFC"
+                            data-team-titles="0" data-team-appearances="6" data-team-scorer="Sami Al-Jaber (3)">
+                            <img src="https://flagcdn.com/w80/sa.png" alt="Bandera Arabia Saudita">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Arabia Saudita</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Marruecos" data-team-confederation="CAF"
+                            data-team-titles="0" data-team-appearances="7" data-team-scorer="Ahmed Faras (36)">
+                            <img src="https://flagcdn.com/w80/ma.png" alt="Bandera Marruecos">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Marruecos</h5>
+                        </div>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#teamModal" data-team-name="Francia" data-team-confederation="UEFA"
+                            data-team-titles="2" data-team-appearances="15" data-team-scorer="Just Fontaine (13)">
+                            <img src="https://flagcdn.com/w80/fr.png" alt="Bandera Francia">
+                            <h5 class="ms-1 mb-0" style="color: #fff;">Francia</h5>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bottom-nav fixed-bottom">
+            <nav class="nav nav-pills nav-fill">
+                <a class="nav-link" href="#inicio">
+                    <i class="bi bi-house-door-fill fs-4"></i>
+                    <span class="d-block small">Inicio</span>
+                </a>
+                <a class="nav-link" href="#trivia">
+                    <i class="bi bi-patch-question-fill fs-4"></i>
+                    <span class="d-block small">Trivia</span>
+                </a>
+                <a class="nav-link" href="#highlights">
+                    <i class="bi bi-play-btn-fill fs-4"></i>
+                    <span class="d-block small">Videos</span>
+                </a>
+                <a class="nav-link" href="#teams">
+                    <i class="bi bi-flag-fill fs-4"></i>
+                    <span class="d-block small">Equipos</span>
+                </a>
+            </nav>
+        </footer>
+    </div>
+
+    <div class="modal fade" id="teamModal" tabindex="-1" aria-labelledby="teamModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="teamModalLabel">Estadísticas del Equipo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Confederación:</strong> <span id="modal-confederation"></span></p>
+                    <p><strong>Títulos Mundiales:</strong> <span id="modal-titles"></span></p>
+                    <p><strong>Participaciones:</strong> <span id="modal-appearances"></span></p>
+                    <p><strong>Máximo Goleador:</strong> <span id="modal-scorer"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="./js/start.js"></script>
+
+</body>
+
+</html>
