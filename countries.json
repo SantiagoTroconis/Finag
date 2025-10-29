@@ -1,0 +1,376 @@
+{
+  "argentina": {
+    "name": "Argentina",
+    "flag": "🇦🇷",
+    "nickname": "La Albiceleste",
+    "founded": 1893,
+    "bestPlayer": "Lionel Messi",
+    "stadium": "Estadio Monumental",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "18",
+      "Mejor Resultado": "Campeón (1978, 1986, 2022)"
+    },
+    "quiz": {
+      "question": "¿En qué año ganó Argentina su primera Copa del Mundo?",
+      "options": {
+        "a": "1978",
+        "b": "1986",
+        "c": "1990"
+      },
+      "correct": "a"
+    }
+  },
+  "australia": {
+    "name": "Australia",
+    "flag": "🇦🇺",
+    "nickname": "Socceroos",
+    "founded": 1961,
+    "bestPlayer": "Tim Cahill",
+    "stadium": "Stadium Australia",
+    "videoId": "fMz_Cfw8Z1A",
+    "stats": {
+      "Participaciones": "6",
+      "Mejor Resultado": "Octavos de final (2006, 2022)"
+    },
+    "quiz": {
+      "question": "¿Contra qué equipo Australia consiguió su primera victoria en una Copa del Mundo en 2006?",
+      "options": {
+        "a": "Brasil",
+        "b": "Croacia",
+        "c": "Japón"
+      },
+      "correct": "c"
+    }
+  },
+  "brazil": {
+    "name": "Brasil",
+    "flag": "🇧🇷",
+    "nickname": "La Canarinha",
+    "founded": 1914,
+    "bestPlayer": "Pelé",
+    "stadium": "Maracanã",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "22",
+      "Mejor Resultado": "Campeón (1958, 1962, 1970, 1994, 2002)"
+    },
+    "quiz": {
+      "question": "¿Cuál es el único país que ha participado en todas las ediciones de la Copa del Mundo?",
+      "options": {
+        "a": "Alemania",
+        "b": "Argentina",
+        "c": "Italia"
+      },
+      "correct": "d"
+    }
+  },
+  "canada": {
+    "name": "Canadá",
+    "flag": "🇨🇦",
+    "nickname": "Les Rouges",
+    "founded": 1912,
+    "bestPlayer": "Alphonso Davies",
+    "stadium": "BMO Field",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "2",
+      "Mejor Resultado": "Fase de grupos (1986, 2022)"
+    },
+    "quiz": {
+      "question": "¿En qué año participó Canadá en su primera Copa del Mundo?",
+      "options": {
+        "a": "1982",
+        "b": "1986",
+        "c": "1994"
+      },
+      "correct": "b"
+    }
+  },
+  "ecuador": {
+    "name": "Ecuador",
+    "flag": "🇪🇨",
+    "nickname": "La Tri",
+    "founded": 1925,
+    "bestPlayer": "Antonio Valencia",
+    "stadium": "Estadio Rodrigo Paz Delgado",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "4",
+      "Mejor Resultado": "Octavos de final (2006)"
+    },
+    "quiz": {
+      "question": "¿Cuál ha sido la mejor participación de Ecuador en una Copa del Mundo?",
+      "options": {
+        "a": "Cuartos de final",
+        "b": "Octavos de final",
+        "c": "Fase de grupos"
+      },
+      "correct": "b"
+    }
+  },
+  "england": {
+    "name": "Inglaterra",
+    "flag": "🇬🇧",
+    "nickname": "The Three Lions",
+    "founded": 1863,
+    "bestPlayer": "Wayne Rooney",
+    "stadium": "Wembley Stadium",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "16",
+      "Mejor Resultado": "Campeón (1966)"
+    },
+    "quiz": {
+      "question": "¿En qué año ganó Inglaterra su única Copa del Mundo?",
+      "options": {
+        "a": "1962",
+        "b": "1966",
+        "c": "1970"
+      },
+      "correct": "b"
+    }
+  },
+  "france": {
+    "name": "Francia",
+    "flag": "🇫🇷",
+    "nickname": "Les Bleus",
+    "founded": 1919,
+    "bestPlayer": "Zinedine Zidane",
+    "stadium": "Stade de France",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "16",
+      "Mejor Resultado": "Campeón (1998, 2018)"
+    },
+    "quiz": {
+      "question": "¿Quién fue el capitán de la selección francesa que ganó el Mundial de 1998?",
+      "options": {
+        "a": "Zinedine Zidane",
+        "b": "Didier Deschamps",
+        "c": "Laurent Blanc"
+      },
+      "correct": "b"
+    }
+  },
+  "germany": {
+    "name": "Alemania",
+    "flag": "🇩🇪",
+    "nickname": "Die Mannschaft",
+    "founded": 1900,
+    "bestPlayer": "Franz Beckenbauer",
+    "stadium": "Olympiastadion",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "20",
+      "Mejor Resultado": "Campeón (1954, 1974, 1990, 2014)"
+    },
+    "quiz": {
+      "question": "¿Cuántas veces ha ganado Alemania la Copa del Mundo?",
+      "options": {
+        "a": "2",
+        "b": "3",
+        "c": "4"
+      },
+      "correct": "c"
+    }
+  },
+  "iran": {
+    "name": "Irán",
+    "flag": "🇮🇷",
+    "nickname": "Team Melli",
+    "founded": 1920,
+    "bestPlayer": "Ali Daei",
+    "stadium": "Azadi Stadium",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "6",
+      "Mejor Resultado": "Fase de grupos"
+    },
+    "quiz": {
+      "question": "¿Contra qué selección Irán consiguió su primera victoria en un Mundial en 1998?",
+      "options": {
+        "a": "Alemania",
+        "b": "Yugoslavia",
+        "c": "Estados Unidos"
+      },
+      "correct": "c"
+    }
+  },
+  "japan": {
+    "name": "Japón",
+    "flag": "🇯🇵",
+    "nickname": "Samurai Blue",
+    "founded": 1921,
+    "bestPlayer": "Keisuke Honda",
+    "stadium": "Saitama Stadium",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "7",
+      "Mejor Resultado": "Octavos de final (2002, 2010, 2018, 2022)"
+    },
+    "quiz": {
+      "question": "¿En qué año Japón fue coanfitrión de la Copa del Mundo?",
+      "options": {
+        "a": "1998",
+        "b": "2002",
+        "c": "2006"
+      },
+      "correct": "b"
+    }
+  },
+  "jordan": {
+    "name": "Jordania",
+    "flag": "🇯🇴",
+    "nickname": "النشامى (The Chivalrous)",
+    "founded": 1949,
+    "bestPlayer": "Odai Al-Saify",
+    "stadium": "Amman International Stadium",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "Clasificado por primera vez para 2026",
+      "Mejor Resultado": "Por determinar"
+    },
+    "quiz": {
+      "question": "La Copa del Mundo de 2026 será la primera para Jordania. ¿En qué confederación compiten?",
+      "options": {
+        "a": "CAF (África)",
+        "b": "CONCACAF (Norte, Centroamérica y el Caribe)",
+        "c": "AFC (Asia)"
+      },
+      "correct": "c"
+    }
+  },
+  "new_zealand": {
+    "name": "Nueva Zelanda",
+    "flag": "🇳🇿",
+    "nickname": "All Whites",
+    "founded": 1891,
+    "bestPlayer": "Wynton Rufer",
+    "stadium": "Eden Park",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "2",
+      "Mejor Resultado": "Fase de grupos (1982, 2010)"
+    },
+    "quiz": {
+      "question": "En el Mundial de 2010, Nueva Zelanda fue el único equipo que no perdió ningún partido. ¿Cuántos partidos empató?",
+      "options": {
+        "a": "1",
+        "b": "2",
+        "c": "3"
+      },
+      "correct": "c"
+    }
+  },
+  "south_korea": {
+    "name": "Corea del Sur",
+    "flag": "🇰🇷",
+    "nickname": "Tigres de Asia",
+    "founded": 1928,
+    "bestPlayer": "Son Heung-min",
+    "stadium": "Seoul World Cup Stadium",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "11",
+      "Mejor Resultado": "Cuarto lugar (2002)"
+    },
+    "quiz": {
+      "question": "¿Cuál fue la mejor actuación de Corea del Sur en una Copa del Mundo, alcanzando las semifinales?",
+      "options": {
+        "a": "1998",
+        "b": "2002",
+        "c": "2006"
+      },
+      "correct": "b"
+    }
+  },
+  "spain": {
+    "name": "España",
+    "flag": "🇪🇸",
+    "nickname": "La Roja",
+    "founded": 1909,
+    "bestPlayer": "Andrés Iniesta",
+    "stadium": "Estadio Santiago Bernabéu",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "16",
+      "Mejor Resultado": "Campeón (2010)"
+    },
+    "quiz": {
+      "question": "¿Contra qué equipo jugó España la final del Mundial de 2010?",
+      "options": {
+        "a": "Alemania",
+        "b": "Países Bajos",
+        "c": "Argentina"
+      },
+      "correct": "b"
+    }
+  },
+  "usa": {
+    "name": "Estados Unidos",
+    "flag": "🇺🇸",
+    "nickname": "The Stars and Stripes",
+    "founded": 1913,
+    "bestPlayer": "Landon Donovan",
+    "stadium": "MetLife Stadium",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "11",
+      "Mejor Resultado": "Tercer lugar (1930)"
+    },
+    "quiz": {
+      "question": "¿Cuál fue el mejor resultado de Estados Unidos en la primera Copa del Mundo de 1930?",
+      "options": {
+        "a": "Campeón",
+        "b": "Subcampeón",
+        "c": "Tercer lugar"
+      },
+      "correct": "c"
+    }
+  },
+  "uzbekistan": {
+    "name": "Uzbekistán",
+    "flag": "🇺🇿",
+    "nickname": "Lobos Blancos",
+    "founded": 1946,
+    "bestPlayer": "Server Djeparov",
+    "stadium": "Milliy Stadium",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "Clasificado por primera vez para 2026",
+      "Mejor Resultado": "Por determinar"
+    },
+    "quiz": {
+      "question": "Junto con Jordania, Uzbekistán se clasificó por primera vez para la Copa del Mundo de 2026. ¿A qué confederación pertenece?",
+      "options": {
+        "a": "UEFA (Europa)",
+        "b": "AFC (Asia)",
+        "c": "CONMEBOL (Sudamérica)"
+      },
+      "correct": "b"
+    }
+  },
+  "venezuela": {
+    "name": "Venezuela",
+    "flag": "🇻🇪",
+    "nickname": "La Vinotinto",
+    "founded": 1926,
+    "bestPlayer": "Juan Arango",
+    "stadium": "Estadio Olímpico de la UCV",
+    "videoId": "VIDEO_ID_DE_YOUTUBE",
+    "stats": {
+      "Participaciones": "0",
+      "Mejor Resultado": "Nunca ha clasificado"
+    },
+    "quiz": {
+      "question": "¿Cuál es la única selección de la CONMEBOL que nunca ha clasificado a una Copa del Mundo?",
+      "options": {
+        "a": "Bolivia",
+        "b": "Perú",
+        "c": "Ecuador"
+      },
+      "correct": "d"
+    }
+  }
+}
