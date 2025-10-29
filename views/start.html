@@ -15,7 +15,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Russo+One&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
@@ -26,11 +25,7 @@
             min-height: 100vh;
         }
 
-        h1,
-        h2,
-        h3,
-        .navbar-brand,
-        .modal-title {
+        h1, h2, h3, .navbar-brand, .modal-title {
             font-family: 'Russo One', sans-serif;
             letter-spacing: 1px;
         }
@@ -130,12 +125,12 @@
         .horizontal-scroll-wrapper .row {
             flex-wrap: nowrap;
         }
-
+        
+        /* 💡 Revertido a tu CSS original */
         .horizontal-scroll-wrapper .col-custom {
             display: inline-block;
             float: none;
             width: 80%;
-            /* Ancho de cada tarjeta */
             max-width: 320px;
             vertical-align: top;
         }
@@ -162,12 +157,17 @@
             border-top: 1px solid #1f4068;
         }
 
-        /* Estilos para los botones de filtro */
+        /* 💡 CORRECCIÓN CSS: Botones de Filtro */
         .filter-buttons {
             padding: 0.75rem;
             background-color: rgba(31, 64, 104, 0.3);
             border-top: 1px solid #1f4068;
             border-radius: 0 0 1rem 1rem;
+            /* 💡 Añadido para arreglar el desbordamiento */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.25rem; 
         }
 
         .filter-btn {
@@ -175,7 +175,7 @@
             color: #f0f0f0;
             border: 1px solid #1f4068;
             padding: 0.4rem 0.8rem;
-            margin: 0 0.25rem;
+            /* margin: 0 0.25rem; */ /* 💡 Reemplazado por 'gap' */
             border-radius: 0.5rem;
             font-size: 0.8rem;
             font-weight: 500;
@@ -196,7 +196,7 @@
             border-color: #e0f780;
         }
 
-        /* Filtros CSS para los videos */
+        /* CSS para los filtros (sin cambios) */
         .video-container.grayscale iframe {
             filter: grayscale(100%) contrast(1.2);
         }
@@ -224,8 +224,7 @@
             <section id="trivia" class="container-fluid mb-5">
                 <h2 class="section-title text-center">Pon a prueba tus conocimientos</h2>
                 <div id="quiz-container" class="horizontal-scroll-wrapper px-3">
-
-                </div>
+                    </div>
             </section>
 
             <hr class="my-5" style="border-color: #1f4068;">
@@ -267,20 +266,20 @@
                 <h2 class="section-title text-center">Momentos Inolvidables</h2>
                 <div id="highlightsContainer" class="horizontal-scroll-wrapper px-3">
                     <div class="row g-4">
-                    </div>
+                        </div>
                 </div>
             </section>
 
             <hr class="my-5" style="border-color: #1f4068;">
 
             <section id="teams" class="container">
-                <h2 class="section-title text-center">Equipos a Seguir
-                </h2>
+                <h2 class="section-title text-center">Equipos a Seguir</h2>
                 <div class="row g-3">
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Canadá" data-team-confederation="CONCACAF"
-                            data-team-titles="0" data-team-appearances="3" data-team-scorer="–">
+                            data-team-titles="0" data-team-appearances="3" data-team-scorer="–"
+                            data-team-flag="https://flagcdn.com/w80/ca.png">
                             <img src="https://flagcdn.com/w80/ca.png" alt="Bandera Canadá">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Canadá</h5>
                         </div>
@@ -288,7 +287,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="México" data-team-confederation="CONCACAF"
-                            data-team-titles="0" data-team-appearances="17" data-team-scorer="Javier Hernández (52)">
+                            data-team-titles="0" data-team-appearances="17" data-team-scorer="Javier Hernández (52)"
+                            data-team-flag="https://flagcdn.com/w80/mx.png">
                             <img src="https://flagcdn.com/w80/mx.png" alt="Bandera México">
                             <h5 class="ms-1 mb-0" style="color: #fff;">México</h5>
                         </div>
@@ -297,16 +297,17 @@
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Estados Unidos"
                             data-team-confederation="CONCACAF" data-team-titles="0" data-team-appearances="11"
-                            data-team-scorer="Clint Dempsey (57)">
+                            data-team-scorer="Clint Dempsey (57)"
+                            data-team-flag="https://flagcdn.com/w80/us.png">
                             <img src="https://flagcdn.com/w80/us.png" alt="Bandera USA">
                             <h5 class="ms-1 mb-0" style="color: #fff;">EE.UU.</h5>
                         </div>
                     </div>
-
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Argentina" data-team-confederation="CONMEBOL"
-                            data-team-titles="3" data-team-appearances="18" data-team-scorer="Lionel Messi (106)">
+                            data-team-titles="3" data-team-appearances="18" data-team-scorer="Lionel Messi (106)"
+                            data-team-flag="https://flagcdn.com/w80/ar.png">
                             <img src="https://flagcdn.com/w80/ar.png" alt="Bandera Argentina">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Argentina</h5>
                         </div>
@@ -314,7 +315,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Brasil" data-team-confederation="CONMEBOL"
-                            data-team-titles="5" data-team-appearances="22" data-team-scorer="Neymar (79)">
+                            data-team-titles="5" data-team-appearances="22" data-team-scorer="Neymar (79)"
+                            data-team-flag="https://flagcdn.com/w80/br.png">
                             <img src="https://flagcdn.com/w80/br.png" alt="Bandera Brasil">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Brasil</h5>
                         </div>
@@ -322,7 +324,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Colombia" data-team-confederation="CONMEBOL"
-                            data-team-titles="0" data-team-appearances="7" data-team-scorer="Radamel Falcao (35)">
+                            data-team-titles="0" data-team-appearances="7" data-team-scorer="Radamel Falcao (35)"
+                            data-team-flag="https://flagcdn.com/w80/co.png">
                             <img src="https://flagcdn.com/w80/co.png" alt="Bandera Colombia">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Colombia</h5>
                         </div>
@@ -330,7 +333,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Paraguay" data-team-confederation="CONMEBOL"
-                            data-team-titles="0" data-team-appearances="8" data-team-scorer="Roque Santa Cruz (32)">
+                            data-team-titles="0" data-team-appearances="8" data-team-scorer="Roque Santa Cruz (32)"
+                            data-team-flag="https://flagcdn.com/w80/py.png">
                             <img src="https://flagcdn.com/w80/py.png" alt="Bandera Paraguay">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Paraguay</h5>
                         </div>
@@ -338,7 +342,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Ecuador" data-team-confederation="CONMEBOL"
-                            data-team-titles="0" data-team-appearances="4" data-team-scorer="Enner Valencia (37)">
+                            data-team-titles="0" data-team-appearances="4" data-team-scorer="Enner Valencia (37)"
+                            data-team-flag="https://flagcdn.com/w80/ec.png">
                             <img src="https://flagcdn.com/w80/ec.png" alt="Bandera Ecuador">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Ecuador</h5>
                         </div>
@@ -346,7 +351,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Uruguay" data-team-confederation="CONMEBOL"
-                            data-team-titles="2" data-team-appearances="14" data-team-scorer="Luis Suárez (68)">
+                            data-team-titles="2" data-team-appearances="14" data-team-scorer="Luis Suárez (68)"
+                            data-team-flag="https://flagcdn.com/w80/uy.png">
                             <img src="https://flagcdn.com/w80/uy.png" alt="Bandera Uruguay">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Uruguay</h5>
                         </div>
@@ -354,7 +360,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Australia" data-team-confederation="AFC"
-                            data-team-titles="0" data-team-appearances="6" data-team-scorer="Tim Cahill (50)">
+                            data-team-titles="0" data-team-appearances="6" data-team-scorer="Tim Cahill (50)"
+                            data-team-flag="https://flagcdn.com/w80/au.png">
                             <img src="https://flagcdn.com/w80/au.png" alt="Bandera Australia">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Australia</h5>
                         </div>
@@ -362,7 +369,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Portugal" data-team-confederation="UEFA"
-                            data-team-titles="3" data-team-appearances="6" data-team-scorer="André Silva (14)">
+                            data-team-titles="3" data-team-appearances="6" data-team-scorer="André Silva (14)"
+                            data-team-flag="https://flagcdn.com/w80/pt.png">
                             <img src="https://flagcdn.com/w80/pt.png" alt="Bandera Portugal">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Portugal</h5>
                         </div>
@@ -370,7 +378,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Japón" data-team-confederation="AFC"
-                            data-team-titles="0" data-team-appearances="7" data-team-scorer="Kunishige Kamamoto (80)">
+                            data-team-titles="0" data-team-appearances="7" data-team-scorer="Kunishige Kamamoto (80)"
+                            data-team-flag="https://flagcdn.com/w80/jp.png">
                             <img src="https://flagcdn.com/w80/jp.png" alt="Bandera Japón">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Japón</h5>
                         </div>
@@ -378,7 +387,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Jordania" data-team-confederation="AFC"
-                            data-team-titles="0" data-team-appearances="0" data-team-scorer="–">
+                            data-team-titles="0" data-team-appearances="0" data-team-scorer="–"
+                            data-team-flag="https://flagcdn.com/w80/jo.png">
                             <img src="https://flagcdn.com/w80/jo.png" alt="Bandera Jordania">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Jordania</h5>
                         </div>
@@ -386,7 +396,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Corea del Sur" data-team-confederation="AFC"
-                            data-team-titles="0" data-team-appearances="11" data-team-scorer="Cha Bum-k-un (58)">
+                            data-team-titles="0" data-team-appearances="11" data-team-scorer="Cha Bum-k-un (58)"
+                            data-team-flag="https://flagcdn.com/w80/kr.png">
                             <img src="https://flagcdn.com/w80/kr.png" alt="Bandera Corea del Sur">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Corea del Sur</h5>
                         </div>
@@ -394,7 +405,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="España" data-team-confederation="UEFA"
-                            data-team-titles="1" data-team-appearances="15" data-team-scorer="David Villa (59)">
+                            data-team-titles="1" data-team-appearances="15" data-team-scorer="David Villa (59)"
+                            data-team-flag="https://flagcdn.com/w80/es.png">
                             <img src="https://flagcdn.com/w80/es.png" alt="Bandera España">
                             <h5 class="ms-1 mb-0" style="color: #fff;">España</h5>
                         </div>
@@ -402,7 +414,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Arabia Saudita" data-team-confederation="AFC"
-                            data-team-titles="0" data-team-appearances="6" data-team-scorer="Sami Al-Jaber (3)">
+                            data-team-titles="0" data-team-appearances="6" data-team-scorer="Sami Al-Jaber (3)"
+                            data-team-flag="https://flagcdn.com/w80/sa.png">
                             <img src="https://flagcdn.com/w80/sa.png" alt="Bandera Arabia Saudita">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Arabia Saudita</h5>
                         </div>
@@ -410,7 +423,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Marruecos" data-team-confederation="CAF"
-                            data-team-titles="0" data-team-appearances="7" data-team-scorer="Ahmed Faras (36)">
+                            data-team-titles="0" data-team-appearances="7" data-team-scorer="Ahmed Faras (36)"
+                            data-team-flag="https://flagcdn.com/w80/ma.png">
                             <img src="https://flagcdn.com/w80/ma.png" alt="Bandera Marruecos">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Marruecos</h5>
                         </div>
@@ -418,7 +432,8 @@
                     <div class="col-6 col-md-4">
                         <div class="card team-card p-3 d-flex flex-row align-items-center" data-bs-toggle="modal"
                             data-bs-target="#teamModal" data-team-name="Francia" data-team-confederation="UEFA"
-                            data-team-titles="2" data-team-appearances="15" data-team-scorer="Just Fontaine (13)">
+                            data-team-titles="2" data-team-appearances="15" data-team-scorer="Just Fontaine (13)"
+                            data-team-flag="https://flagcdn.com/w80/fr.png">
                             <img src="https://flagcdn.com/w80/fr.png" alt="Bandera Francia">
                             <h5 class="ms-1 mb-0" style="color: #fff;">Francia</h5>
                         </div>
@@ -458,6 +473,9 @@
                         aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <div class="text-center mb-3">
+                        <img id="modal-flag" src="" alt="Bandera" class="img-fluid" style="width: 100px; border-radius: 0.5rem; border: 2px solid #1f4068;">
+                    </div>
                     <p><strong>Confederación:</strong> <span id="modal-confederation"></span></p>
                     <p><strong>Títulos Mundiales:</strong> <span id="modal-titles"></span></p>
                     <p><strong>Participaciones:</strong> <span id="modal-appearances"></span></p>
@@ -469,7 +487,6 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
     <script type="module" src="./js/start.js"></script>
 
 </body>
