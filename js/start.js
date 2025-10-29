@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function () {
         async function loadTFModel() {
             try {
                 model = await tf.loadLayersModel('./model/model.json');
-                resultEl.textContent = "✅ ¡Listo! Apunta tu cámara a una bandera.";
+                resultEl.textContent = "¡Listo! Apunta tu cámara a una bandera.";
             } catch(e) {
                 resultEl.textContent = "Error al cargar el detector.";
                 console.error(e);
@@ -470,9 +470,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         function applyModelScale(model, country) {
             let scale = 2.0;
-            if (['Arabia saudita', 'Australia', 'Canada', 'Jordania', 'Marruecos', 'Usa', 'Ecuador', 'España', 'Paraguay', 'Uruguay'].includes(country)) {
+            if (['Arabia saudita', 'Australia', 'Canada', 'Jordania', 'Marruecos', 'Usa', 'Ecuador', 'España', 'Paraguay', 'Uruguay', 'Japon'].includes(country)) {
                 scale = 5.0;
-            } else if (['Brasil', 'Japon'].includes(country)) {
+            } else if (['Brasil'].includes(country)) {
                 scale = 0.08;
             }
             model.scale.set(scale, scale, scale);
