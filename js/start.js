@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <button class="filter-btn active" data-filter="normal" data-video-id="${video.videos[1].titulo.replace(/\s+/g, '-').toLowerCase()}"><i class="bi bi-circle"></i> Normal</button>
                                         <button class="filter-btn" data-filter="grayscale" data-video-id="${video.videos[1].titulo.replace(/\s+/g, '-').toLowerCase()}"><i class="bi bi-moon"></i> B&N</button>
                                         <button class="filter-btn" data-filter="sepia" data-video-id="${video.videos[1].titulo.replace(/\s+/g, '-').toLowerCase()}"><i class="bi bi-sun"></i> Sepia</button>
+                                        <button class="filter-btn" data-filter="invert" data-video-id="${video.videos[1].titulo.replace(/\s+/g, '-').toLowerCase()}"><i class="bi bi-palette"></i> Invert</button>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     const buttonsContainer = this.parentElement;
                     buttonsContainer.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
                     this.classList.add('active');
-                    videoContainer.classList.remove('normal', 'grayscale', 'sepia');
+                    videoContainer.classList.remove('normal', 'grayscale', 'sepia', 'invert');
                     videoContainer.classList.add(filter);
                     this.style.transform = 'scale(0.95)';
                     setTimeout(() => { this.style.transform = ''; }, 150);
