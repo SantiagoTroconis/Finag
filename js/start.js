@@ -183,6 +183,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const resultEl = document.getElementById('result');
         const arToggleButton = document.getElementById('arToggleButton');
         const arCanvas = document.getElementById('arCanvas');
+        const animationControls = document.getElementById('animationControls');
+        const startAnimationBtn = document.getElementById('startAnimationBtn');
+        const stopAnimationBtn = document.getElementById('stopAnimationBtn');
 
         if (!activateCameraBtn) return; 
 
@@ -193,6 +196,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let scene, camera, renderer, loader;
         let currentModelInScene = null;
         let currentDetectedCountry = null;
+        let isAnimating = true;
 
         const countryData = {
             "Canada": { modelPath: './models/Canada.glb' },
@@ -238,6 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cameraContainer.style.display = 'none';
             activateCameraBtn.style.display = 'inline-block';
             arToggleButton.style.display = 'none';
+            animationControls.style.display = 'none';
 
             if (predictRAF) {
                 cancelAnimationFrame(predictRAF);
@@ -265,6 +270,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         arToggleButton.addEventListener('click', toggleARModel);
+        startAnimationBtn.addEventListener('click', () => isAnimating = true);
+        stopAnimationBtn.addEventListener('click', () => isAnimating = false);
 
         async function setupCamera() {
             try {
@@ -341,6 +348,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (detectedLabel === "Sin Bandera" || !countryData[detectedLabel]) {
                 if (currentDetectedCountry !== null) { 
                     arToggleButton.style.display = 'none';
+                    animationControls.style.display = 'none';
                     if (currentModelInScene) {
                         disposeModel(currentModelInScene);
                         currentModelInScene = null;
@@ -359,6 +367,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 arToggleButton.style.display = 'block';
+                animationControls.style.display = 'none';
                 arToggleButton.innerHTML = `<i class="bi bi-box me-2"></i> Ver Modelo de ${detectedLabel}`;
                 arToggleButton.dataset.country = detectedLabel;
                 arToggleButton.disabled = false;
@@ -374,6 +383,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 currentModelInScene = null;
                 arToggleButton.innerHTML = `<i class="bi bi-box me-2"></i> Ver Modelo de ${country}`;
                 arToggleButton.disabled = false;
+                animationControls.style.display = 'none';
             }
             else {
                 if (!countryData[country]) {
@@ -404,6 +414,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     currentModelInScene = newModel;
 
                     arToggleButton.innerHTML = `<i class="bi bi-eye-slash me-2"></i> Ocultar Modelo`;
+                    animationControls.style.display = 'flex';
 
                 } catch (e) {
                     console.error(`No se pudo cargar el modelo para ${country}:`, e);
@@ -420,7 +431,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function animateThreeJS() {
-            if (currentModelInScene) {
+            if (currentModelInScene && isAnimating) {
                 currentModelInScene.rotation.y += 0.01;
             }
             if (renderer && scene && camera) {
